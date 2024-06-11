@@ -50,4 +50,43 @@ class ActivityController extends Controller
         $activities = Activity::all();
         return view('activities.index', compact('activities'));
     }
+
+    public function edit($id)
+    {
+        $activity = Activity::findOrFail($id);
+        $classes = Class1::all();
+        return view('activities.edit', compact('activity', 'classes'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'activity_id' => 'required|string|max:255',
+            'activity_name' => 'required|string|max:255',
+            'activity_description' => 'required|string',
+            'class_id' => 'required|exists:class1s,id',
+            'subject_id' => 'required|string|max:255',
+            'activity_date' => 'required|date',
+        ]);
+
+    $activity = Activity::findOrFail($id);
+    $activity->update([
+        'activity_id' => $request->activity_id,
+        'activity_name' => $request->activity_name,
+        'activity_description' => $request->activity_description,
+        'class_id' => $request->class_id,
+        'class_name' => Class1::find($request->class_id)->class_name,
+        'subject_id' => $request->subject_id,
+        'activity_date' => $request->activity_date,
+    ]);
+    return redirect()->route('activities.index')->with('success', 'Activity updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $activity = Activity::findOrFail($id);
+        $activity->delete();
+        return redirect()->route('activities.index')->with('success', 'Activity deleted successfully.');
+    }
+
 }

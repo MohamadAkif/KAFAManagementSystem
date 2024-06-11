@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/teacher/activities', [ActivityController::class, 'index'])->name('teacher.activities');
     Route::get('/teacher/create_activity', [ActivityController::class, 'create'])->name('teacher.create_activity');
     Route::get('/teacher/list_activities', [ActivityController::class, 'index'])->name('teacher.list_activities');
+    Route::resource('activities', ActivityController::class);
 });
+
 
 
