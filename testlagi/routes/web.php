@@ -51,8 +51,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-Route::get('parent/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
+Route::get('parent/dashboard', [ParentController::class, 'dashboard'])->name('parent.dashboard');
+Route::get('parent/activities', [ParentController::class, 'index'])->name('parent.activities');
 Route::post('parent/join-activity/{id}', [ParentController::class, 'joinActivity'])->name('parent.join-activity');
+Route::get('parent/activities-joined', [ParentController::class, 'activitiesJoined'])->name('parent.activities-joined');
+Route::delete('parent/delete-joined-activity/{id}', [ParentController::class, 'deleteJoinedActivity'])->name('parent.delete-joined-activity');
 });
 
 Route::resource('activities', ActivityController::class);

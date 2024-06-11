@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('parent_id')->constrained('users'); // Assuming parents are users
             $table->foreignId('activity_id')->constrained('activities');
             $table->timestamps();
+
+            $table->unique(['parent_id', 'activity_id']);
         });
     }
 
