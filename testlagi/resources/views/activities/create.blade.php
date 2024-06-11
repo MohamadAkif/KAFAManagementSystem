@@ -35,6 +35,10 @@
                             </select>
                         </div>
                         <div class="mt-4">
+                            <label for="subject_id" class="block font-medium text-sm text-gray-700">Subject</label>
+                            <input id="subject_id" class="block mt-1 w-full" type="text" name="subject_id" value="{{ old('subject_id') }}" required />
+                        </div>
+                        <div class="mt-4">
                             <label for="activity_date" class="block font-medium text-sm text-gray-700">Activity Date</label>
                             <input id="activity_date" class="block mt-1 w-full" type="date" name="activity_date" value="{{ old('activity_date') }}" required />
                         </div>
