@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ParentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,5 +50,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('activities', ActivityController::class);
 });
 
+Route::middleware(['auth'])->group(function () {
+Route::get('parent/dashboard', [ParentController::class, 'index'])->name('parent.dashboard');
+Route::post('parent/join-activity/{id}', [ParentController::class, 'joinActivity'])->name('parent.join-activity');
+});
 
-
+Route::resource('activities', ActivityController::class);
+Route::resource('classes', ClassController::class);
