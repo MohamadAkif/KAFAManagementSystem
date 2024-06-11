@@ -14,4 +14,9 @@ class TeacherController extends Controller
         $classes = Class1::all(['id', 'class_name']);
         return view('teacher.dashboard', compact('activities', 'classes'));
     }
+
+    public function index()
+    {
+        return view('teacher.dashboard');
+    }
 }

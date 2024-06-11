@@ -28,11 +28,21 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if ($request->user()->usertype == 'admin'){
-            return redirect('admin/dashboard');
+        // Check the user type and redirect accordingly
+        $user = $request->user();
+        switch ($user->usertype) {
+            case 'admin':
+                return redirect()->intended('admin/dashboard');
+            case 'teacher':
+                return redirect()->intended('teacher/dashboard');
+            case 'user':
+                return redirect()->intended('parent/dashboard');
+            default:
+                Auth::logout();
+                return redirect('/login')->withErrors([
+                    'email' => 'Your account does not have a valid user type.',
+                ]);
         }
-
-        return redirect()->intended(route('dashboard'));
     }
 
     /**

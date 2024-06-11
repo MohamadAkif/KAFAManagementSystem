@@ -60,3 +60,9 @@ Route::delete('parent/delete-joined-activity/{id}', [ParentController::class, 'd
 
 Route::resource('activities', ActivityController::class);
 Route::resource('classes', ClassController::class);
+
+Route::middleware(['auth'])->group(function () {
+Route::get('/admin/dashboard', [HomeController::class, 'index'])->name('admin.dashboard');
+Route::get('/teacher/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+Route::get('/parent/dashboard', [ParentController::class, 'dashboard'])->name('parent.dashboard');
+});
